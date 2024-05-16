@@ -39,6 +39,9 @@
     <ClCompile Include="_Scripts\Enemy\BattleField.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="_Scripts\Object\Object.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_Scripts\Player\Player.h">
@@ -66,6 +69,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="_Scripts\Enemy\BattleField.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Scripts\Object\Object.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

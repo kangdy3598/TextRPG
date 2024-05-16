@@ -1,25 +1,29 @@
 #pragma once
+#include "../Player/Player.h"
 
-//struct tagStateInfo
-//{
-//	char szName[10]; // NPC 이름
-//
-//};
+struct tagNPCInfo
+{
+	char szName[30]; // NPC 이름
+	POSITION position; // NPC 위치
+
+	int iScriptSize;
+	char szScript[10][256]; // 대사
+};
 
 class CNPC
 {
 private:
 
-	//POSITION m_position;
-	//tagStateInfo m_StateInfo;
+	tagNPCInfo m_NPCInfo;
 
 	POSITION m_Position = POSITION(25, 5);
 
 private:
-	// NPC의 정보를 초기화 합니다.
-	void InitStateInfo(const char _szName[]);
+	
 
 public:
+	// NPC의 정보를 초기화 합니다.
+	void InitNPCInfo(const char _szName[], const char _szscript[][256], int _scriptSize);
 
 	// NPC 위치를 설정 합니다.
 	void SetPosition(int _posX, int _posY);

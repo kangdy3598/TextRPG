@@ -29,6 +29,7 @@
       </ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="_Scripts\NPC\NPC.cpp" />
+    <ClCompile Include="_Scripts\Object\Object.cpp" />
     <ClCompile Include="_Scripts\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +42,7 @@
       </ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="_Scripts\NPC\NPC.h" />
+    <ClInclude Include="_Scripts\Object\Object.h" />
     <ClInclude Include="_Scripts\_pch.h" />
     <ClInclude Include="_Scripts\Player\Player.h" />
     <ClInclude Include="_Scripts\_stdafx.h" />

@@ -26,4 +26,4 @@
 #define NPC_MARK "¢Ã"
 
 #define BATTLE_MARK_NUM 3
-#define BATTILE_MARK "¡Ø"
+#define BATTLE_MARK "¡Ø"

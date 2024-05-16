@@ -1,5 +1,6 @@
 #pragma once
 
+
 #define PUSH_RIGHT "                     "
 
 // KEY INPUT CLASS
@@ -28,10 +29,12 @@ enum {
 	WHITE,
 };
 
+class CPlayer;
+class CBattleField;
 class CGraphics
 {
 private:
-
+	
 private:
 	void gotoxy(int _x, int _y);
 	void SetColor(unsigned short text);
@@ -44,19 +47,34 @@ private:
 
 	// MAP FUNCTION ====================================================
 	
-	void DrawMapBoard(POSITION& _position, int _mapData[][20]);
-	int InputPlayerPos(POSITION _position, int _mapData[][20]);
+	// BATTLEFIELD FUNCTION ============================================
+	
+	// 키 입력으로 플레이어를 움직입니다.
+	int InputPlayerPos(int _mapData[][20], POSITION* _prevPosition);
 
 	// PLAYER FUNCTION =================================================
 	
-	void DrawPlayerInfo();
+	
+
 	void DrawEnemyInfo();
 	void DrawBattle();
 
 public:
+	// 타이틀 화면을 그립니다.
 	int DrawTitleScreen(bool _bLoadPlayerInfo);
+
+	// 처음으로 맵을 그립니다.
+	void InitDrawMap(int _mapData[][20], POSITION* _position);
+
+	// 맵을 갱신하여 그립니다.
+	POSITION* UpdateDrawMap(int _mapData[][20], int& _hitObject, POSITION* _position);
+	
+	// 플레이어 정보를 담은 UI를 그립니다.
+	void DrawPlayerInfo(tagStateInfo tagStateInfo);
 
 	int DrawSelectJobScreen();
 
-	POSITION* DrawMap(int _mapData[][20], int& _objectNumber);
+	int DrawSelectBattleField();
+
+	void DrawBattleScreen();
 };

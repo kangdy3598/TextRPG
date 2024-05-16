@@ -18,20 +18,24 @@ enum GAME_PROCESSING
 class CGameManger
 {
 private:
-	CPlayer* m_CPlayer = nullptr;
-	CEnemy* m_CEnemy = nullptr;
+	// ★상속성 : CPlayer와 CEnemy의 부모인 CObject로 변수를 선언한다.
+	CObject* m_CPlayer = nullptr;
+	CObject* m_CEnemy = nullptr;
+
 	CNPC* m_CNPC = nullptr;
 
 	CMap* m_CMap = nullptr;
+	
 	CBattleField* m_CBattleField = nullptr;
 	CGraphics m_CGraphics;
+
+	bool m_bIsDrawingMap = false;
 private:
 
 	// 게임 초기값을 설정합니다.
 	void InitGame();
 
-	// 행동을 선택합니다.
-	bool SelectAction();
+	void InteractionObject(int _objectNum);
 
 	// 입장할 전투맵를 선택합니다.
 	void SelectBattleMap();

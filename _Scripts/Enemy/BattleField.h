@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include "../Player/Player.h"
 
 class CBattleField
 {
@@ -20,20 +21,21 @@ public:
 	POSITION GetPosition();
 
 	// OBJECT : 전투맵 의 상호작용을 실행합니다.
-	void InteractAction();
+	int InteractAction(int _iSelectNum, CPlayer* _CPlayer);
 
+	
 private:
 	
 	// 입장할 전투맵를 선택합니다.
-	void SelectBattleMap();
+	int SelectBattleMap();
 
 	// 전투맵을 초기화 합니다.
 	bool InitBattleMap(int _iSelectNum);
 
-	// 공격을 할지, 도망을 칠지 선택합니다.
-	bool SelectBattle();
+	// 전투 메뉴를 선택합니다.
+	bool SelectBattleMenu(int _battleFieldNum, CPlayer* _CPlayer);
 
 	// 전투를 진행합니다.
-	void ProcessBattle();
+	bool ProcessBattle(CPlayer* _CPlayer);
 };
 

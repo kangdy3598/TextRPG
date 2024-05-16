@@ -27,17 +27,37 @@ POSITION CNPC::GetPosition()
 
 void CNPC::InteractAction()
 {
-	cout << "NPC와의 상호작용" << endl;
+	ShowDescription();
 	system("pause");
 }
 
-void CNPC::InitStateInfo(const char _szName[])
+void CNPC::InitNPCInfo(const char _szName[], const char _szscript[][256], int _scriptSize)
 {
+	strcpy_s(m_NPCInfo.szName, _szName);
+	m_NPCInfo.iScriptSize = _scriptSize;
+	for (int i = 0; i < _scriptSize; i++)
+	{
+		strcpy_s(m_NPCInfo.szScript[i], _szscript[i]);
+	}
+	
 }
 
 void CNPC::ShowDescription()
 {
-	cout << "test" << endl;
+	int iSelect(0);
+
+	cout << "=====================================";
+	cout << "   " << m_NPCInfo.szName << "   ";
+	cout << "=====================================" << endl;
+
+	for (int i = 0; i < m_NPCInfo.iScriptSize; i++)
+	{
+		cout << m_NPCInfo.szScript[i] << endl;
+	}
+	
+	cout << "1. 수락 2. 거절 : " << endl;
+	cin >> iSelect;
+
 }
 
 void CNPC::Release()

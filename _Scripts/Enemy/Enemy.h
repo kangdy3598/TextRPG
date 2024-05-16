@@ -1,5 +1,5 @@
 #pragma once
-
+#include "../Object/Object.h"
 enum MAPNAME
 {
 	LOW_MAP = 1,
@@ -8,34 +8,28 @@ enum MAPNAME
 	END
 };
 
-struct tagEnemyInfo
-{
-	char szName[32]; // 몬스터 이름
-
-	int iNowHP; // 현재 체력
-	int iMaxHP; // 최대 체력
-
-	int iAttackPower; // 공격력
-	int iDefensePower; // 방어력
-
-	int iDropGold; // 처지 시 드랍될 골드량
-};
-
-class CEnemy
+class CEnemy : public CObject
 {
 private:
-	tagEnemyInfo m_enemyInfo;
+	//tagEnemyInfo m_enemyInfo;
 
 private:
+	void SetEnemyInfo(const char _szName[], int _iMaxHP, int _iAttackPower);
 
 public:
+
+	CEnemy() { cout << "Enemy 생성자" << endl; }
+	CEnemy(int _num) { cout << "Enemy 생성자 Num :" << _num << endl; }
+	~CEnemy() {}
+
 	void InputInfo();
 
+	void InitInfo(int _battleFieldNum);
 	// 몬스터의 정보를 초기화 합니다.
 	void InitInfo(const char _szName[], int _iMaxHP, int _iAttackPower);
 
 	// 전투 중인 몬스터의 정보를 불러옵니다.
-	tagEnemyInfo GetInfo();
+	//tagStateInfo GetInfo();
 
 	// 전투 중인 몬스터의 정보를 보여줍니다.
 	void ShowInfo();

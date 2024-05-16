@@ -25,48 +25,45 @@ POSITION CBattleField::GetPosition()
 	return m_Position;
 }
 
-void CBattleField::InteractAction()
+int CBattleField::InteractAction(int _iSelectNum, CPlayer* _CPlayer)
 {
-	SelectBattleMap();
+	//return SelectBattleMap();
+	return SelectBattleMenu(_iSelectNum, _CPlayer);
 }
 
-void CBattleField::SelectBattleMap()
+// x
+int CBattleField::SelectBattleMap()
 {
-	int iSelectNum(0);
+	return 0;
+	/*int iSelectNum(0);
 
-	while (true)
+	cout << "1. 초급 2. 중급 3. 고급 4. 전 단계 : ";
+	cin >> iSelectNum;
+
+	
+	switch (iSelectNum)
 	{
-		cout << "1. 초급 2. 중급 3. 고급 4. 전 단계 : ";
-		cin >> iSelectNum;
+	case LOW_MAP:
 		
-		if (!m_CEnemy) m_CEnemy = new CEnemy;
-		switch (iSelectNum)
-		{
-		case LOW_MAP:
-			m_CEnemy->InitInfo("초급 몬스터", 50, 5);
-			break;
-		case MID_MAP:
-			m_CEnemy->InitInfo("중급 몬스터", 70, 7);
-			break;
-		case HIGH_MAP:
-			m_CEnemy->InitInfo("고급 몬스터", 100, 10);
-			break;
-		case END:
-			return;
-		default:
-			cout << "잘못 입력" << endl;
-			system("pause");
-			system("cls");
-			continue;
-		}
-		
-		system("cls");
-		while (SelectBattle())
-		{
-			ProcessBattle();
-		}
-		
-	}
+		break;
+	case MID_MAP:
+		m_CEnemy->InitInfo("중급 몬스터", 70, 7);
+		break;
+	case HIGH_MAP:
+		m_CEnemy->InitInfo("고급 몬스터", 100, 10);
+		break;
+	case END:
+		return END;
+	default:
+		cout << "잘못 입력" << endl;
+		system("pause");
+		return -1;
+	}*/
+
+	/*while (SelectBattle())
+	{
+		ProcessBattle();
+	}*/
 }
 
 bool CBattleField::InitBattleMap(int _iSelectNum)
@@ -74,65 +71,61 @@ bool CBattleField::InitBattleMap(int _iSelectNum)
 	return true;
 }
 
-bool CBattleField::SelectBattle()
+bool CBattleField::SelectBattleMenu(int _battleFieldNum, CPlayer* _CPlayer)
 {
-	/*if (!m_CPlayer->CheckBattleAble())
-	{
-		m_CPlayer->UpdateHP(m_CPlayer->GetStateInfo().iMaxHP);
-		return false;
-	}*/
-
-	if (!m_CEnemy->CheckBattleAble())
-		return false;
-
-
 	int iSelectNum(0);
-	do
+
+	if (!m_CEnemy)
 	{
-		//m_CPlayer->ShowStateInfo();
-		cout << "=================" << endl;
-		m_CEnemy->ShowInfo();
+		m_CEnemy = new CEnemy(1);
+		m_CEnemy->InitInfo(_battleFieldNum);
 
-		cout << "1. 공격 2. 도망 : ";
-		cin >> iSelectNum;
+		cout << "앗!! 야생의 " << m_CEnemy->GetStateInfo().szName << "가 튀어나왔다!!" << endl;
+		cout << "무엇을 할까?" << endl << endl;
+	}
+	m_CEnemy->ShowInfo();
 
-		switch (iSelectNum)
-		{
-		case 1:
-			system("cls");
-			return true;
-		case 2:
-			system("cls");
-			return false;
-		default:
-			cout << "잘못 입력" << endl;
-			system("pause");
-			system("cls");
+	cout << "1. 공격한다. 2. 도망간다. : ";
+	cin >> iSelectNum;
+
+	switch (iSelectNum)
+	{
+	case 1:
+		if (ProcessBattle(_CPlayer))
 			break;
-		}
+	case 2:
+		if (m_CEnemy) SAFE_DELETE(m_CEnemy);
+		return false;
+	default:
+		cout << "잘못 입력" << endl;
+		system("pause");
+		system("cls");
+		break;
+	}
 
-	} while (iSelectNum != 1 && iSelectNum != 2);
-	
 	return true;
 }
 
-void CBattleField::ProcessBattle()
+bool CBattleField::ProcessBattle(CPlayer* _CPlayer)
 {
-	//m_CPlayer->UpdateHP(-m_CEnemy->GetInfo().iAttackPower);
-	//m_CEnemy->UpdateHP(-m_CPlayer->GetStateInfo().iAttackPower);
+	_CPlayer->UpdateHP(-m_CEnemy->GetStateInfo().iAttackPower);
+	m_CEnemy->UpdateHP(-_CPlayer->GetStateInfo().iAttackPower);
 
 	if (!m_CEnemy->CheckBattleAble())
 	{
 		cout << "승리" << endl;
 		system("pause");
 
-		return; // 몬스터를 처치했다면 캐릭터가 죽어도 승리 처리
+		return false; // 몬스터를 처치했다면 캐릭터가 죽어도 승리 처리
 	}
 
-	/*if (!m_CPlayer->CheckBattleAble())
+	if (!_CPlayer->CheckBattleAble())
 	{
 		cout << "사망" << endl;
 		system("pause");
-	}*/
+
+		return false;
+	}
 	
+	return true;
 }

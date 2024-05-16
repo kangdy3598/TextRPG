@@ -1,34 +1,34 @@
 #include "../_stdafx.h"
 #include "Player.h"
 
-void CPlayer::SetPosition(int _posX, int _posY)
-{
-	m_Position.x = _posX;
-	m_Position.y = _posY;
-}
-void CPlayer::SetPosition(POSITION _position)
-{
-	m_Position = _position;
-}
+//void CPlayer::SetPosition(int _posX, int _posY)
+//{
+//	m_Position.x = _posX;
+//	m_Position.y = _posY;
+//}
+//void CPlayer::SetPosition(POSITION _position)
+//{
+//	m_Position = _position;
+//}
+//
+//void CPlayer::GetPosition(int& _posX, int& _posY)
+//{
+//	m_Position.x = _posX;
+//	m_Position.y = _posY;
+//}
+//void CPlayer::GetPosition(POSITION& _position)
+//{
+//	_position = m_Position;
+//}
+//POSITION CPlayer::GetPosition()
+//{
+//	return m_Position;
+//}
 
-void CPlayer::GetPosition(int& _posX, int& _posY)
-{
-	m_Position.x = _posX;
-	m_Position.y = _posY;
-}
-void CPlayer::GetPosition(POSITION& _position)
-{
-	_position = m_Position;
-}
-POSITION CPlayer::GetPosition()
-{
-	return m_Position;
-}
-
-tagStateInfo CPlayer::GetStateInfo()
-{
-	return m_StateInfo;
-}
+//tagStateInfo CPlayer::GetStateInfo()
+//{
+//	return m_StateInfo;
+//}
 
 void CPlayer::SelectJob()
 {
@@ -69,7 +69,7 @@ void CPlayer::InitStateInfo(const char _szJobName[],
 	m_StateInfo.iLevel = 1;
 	m_StateInfo.iNowExp = 0;
 
-	strcpy_s(m_StateInfo.szJobName, _szJobName);
+	strcpy_s(m_StateInfo.szName, _szJobName);
 
 	m_StateInfo.iMaxHP = _iMaxHP;
 	m_StateInfo.iNowHP = _iMaxHP;
@@ -111,13 +111,13 @@ bool CPlayer::LoadStateInfo()
 
 void CPlayer::ShowStateInfo()
 {
-	system("cls");
+	/*system("cls");
 	cout << "이름 :" << m_StateInfo.szJobName << endl;
 	cout << "레벨 : " << m_StateInfo.iLevel << endl;
 	cout << "경험치 : " << m_StateInfo.iNowExp << endl;
 	cout << "체력 :" << m_StateInfo.iNowHP << " / " << m_StateInfo.iMaxHP << endl;
 	cout << "마나 :" << m_StateInfo.iNowMP << " / " << m_StateInfo.iMaxMP << endl;
-	cout << "공격력 :" << m_StateInfo.iAttackPower << endl;
+	cout << "공격력 :" << m_StateInfo.iAttackPower << endl;*/
 }
 
 void CPlayer::UpdateHP(int _iAmount)
