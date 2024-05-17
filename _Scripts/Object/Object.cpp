@@ -25,26 +25,14 @@ POSITION CObject::GetPosition()
 	return m_Position;
 }
 
-tagStateInfo CObject::GetStateInfo()
-{
-	return m_StateInfo;
-}
+//tagObjectInfo CObject::GetObjectInfo()
+//{
+//	
+//}
 
-void CObject::ShowStateInfo()
-{
-}
-
-void CObject::UpdateHP(int _iAmount)
-{
-	m_StateInfo.iNowHP += _iAmount;
-	if (m_StateInfo.iNowHP > m_StateInfo.iMaxHP)
-		m_StateInfo.iNowHP = m_StateInfo.iMaxHP;
-}
-
-bool CObject::CheckBattleAble()
-{
-	return m_StateInfo.iNowHP > 0;
-}
+//void CObject::ShowObjectInfo()
+//{
+//}
 
 void CObject::Release()
 {

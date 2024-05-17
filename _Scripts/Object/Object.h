@@ -1,8 +1,11 @@
 #pragma once
 
-struct tagStateInfo
+struct tagObjectInfo
 {
 	char szName[20]; // 이름
+};
+struct tagBattleObjectInfo : tagObjectInfo
+{
 	int iLevel;  // 레벨
 
 	int iNowHP; // 현재 체력
@@ -11,18 +14,13 @@ struct tagStateInfo
 	int iNowMP; // 현재 마나
 	int iMaxMP; // 최대 마나
 
-	int iNowExp = 0;    // 경험치
-	//int iMaxExp;
-
 	int iAttackPower; // 공격력
 	int iDefensePower; // 방어력
-
 };
 
 class CObject
 {
-protected:
-	tagStateInfo m_StateInfo;
+public:
 
 	POSITION m_Position = POSITION(0, 0);
 
@@ -31,7 +29,7 @@ private:
 
 public:
 
-	CObject() { cout << "Object 생성자" << endl; }
+	CObject() {  }
 	CObject(int _num) { cout << "Object 생성자 Num :" << _num << endl; }
 	~CObject() { }
 
@@ -44,18 +42,17 @@ public:
 	void GetPosition(POSITION& _position);
 	POSITION GetPosition();
 
-	tagStateInfo GetStateInfo();
-
+	// 선택한 오브젝트의 정보를 불러옵니다.
+	//tagObjectInfo GetObjectInfo(){}
+	virtual tagObjectInfo* virtualGetObjectInfo(){ }
 	// 선택한 오브젝트의 정보를 보여줍니다.
-	void ShowStateInfo();
+	//virtual void ShowObjectInfo();
 
 	// _iAmount 만큼 현재 체력을 변경합니다.
-	
-	//vptr vtbl
-	/*virtual->오버라이딩*/ void UpdateHP(int _iAmount); // ★ : 오버라이딩으로
+	virtual void UpdateHP(int _iAmount){}
 	
 	// 현재 전투 가능한지 판단합니다.
-	bool CheckBattleAble();
+	virtual bool CheckBattleAble() { return true; }
 
 	// 메모리를 해제 합니다.
 	void Release();

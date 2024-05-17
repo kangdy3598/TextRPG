@@ -7,7 +7,7 @@ private:
 
 public:
 	
-	void InitMap();
+	//void InitMap();
 	void SetMapData(POSITION _position, int _iDrawType);
 	//void GetMapData(int _mapData[60][20]);
 	void* GetMapData();

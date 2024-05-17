@@ -55,7 +55,7 @@ void CNPC::ShowDescription()
 		cout << m_NPCInfo.szScript[i] << endl;
 	}
 	
-	cout << "1. 수락 2. 거절 : " << endl;
+	cout << "1. 수락 2. 거절 : ";
 	cin >> iSelect;
 
 }

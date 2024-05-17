@@ -1,10 +1,10 @@
 #include "../_stdafx.h"
 #include "Map.h"
 
-void CMap::InitMap()
-{
-	
-}
+//void CMap::InitMap()
+//{
+//	
+//}
 
 void CMap::SetMapData(POSITION _position, int _iDrawType)
 {

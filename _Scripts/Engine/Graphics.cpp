@@ -247,7 +247,7 @@ void CGraphics::DrawBattleScreen()
 	//DrawPlayerInfo();
 }
 
-void CGraphics::DrawPlayerInfo(tagStateInfo tagStateInfo)
+void CGraphics::DrawPlayerInfo(tagPlayerInfo _tagPlayerInfo)
 {
 	// 테두리
 	gotoxy(0, 22);
@@ -261,18 +261,18 @@ void CGraphics::DrawPlayerInfo(tagStateInfo tagStateInfo)
 		gotoxy(118, i); cout << WALL_MARK;
 	}
 
-	gotoxy(5, 25); cout << "직업 : " << tagStateInfo.szName;
-	gotoxy(5, 27); cout << "레벨 : " << tagStateInfo.iLevel;
+	gotoxy(5, 25); cout << "직업 : " << _tagPlayerInfo.szName;
+	gotoxy(5, 27); cout << "레벨 : " << _tagPlayerInfo.iLevel;
 	
 	gotoxy(25, 27); cout << "체력 : " <<
-					tagStateInfo.iNowHP << " / " << tagStateInfo.iMaxHP;
+		_tagPlayerInfo.iNowHP << " / " << _tagPlayerInfo.iMaxHP;
 	gotoxy(45, 27); cout << "마나 : " << 
-					tagStateInfo.iNowMP << " / " << tagStateInfo.iMaxMP;
+		_tagPlayerInfo.iNowMP << " / " << _tagPlayerInfo.iMaxMP;
 	gotoxy(65, 27); cout << "경험치 : " <<
-					tagStateInfo.iNowExp << " / " << 100;
+		_tagPlayerInfo.iNowExp << " / " << 100;
 	
-	gotoxy(45, 25); cout << "공격력 : " << tagStateInfo.iAttackPower;
-	gotoxy(65, 25); cout << "방어력 : " << tagStateInfo.iDefensePower;
+	gotoxy(45, 25); cout << "공격력 : " << _tagPlayerInfo.iAttackPower;
+	gotoxy(65, 25); cout << "방어력 : " << _tagPlayerInfo.iDefensePower;
 
 	gotoxy(0, 0);
 }

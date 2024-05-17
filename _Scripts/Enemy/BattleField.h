@@ -5,9 +5,9 @@
 class CBattleField
 {
 private:
-	CEnemy* m_CEnemy = nullptr;
+	CObject* m_CEnemy = nullptr;
 
-	POSITION m_Position = POSITION(24, 12);
+	POSITION m_Position;
 
 public:
 
@@ -27,10 +27,10 @@ public:
 private:
 	
 	// 입장할 전투맵를 선택합니다.
-	int SelectBattleMap();
+	//int SelectBattleMap();
 
 	// 전투맵을 초기화 합니다.
-	bool InitBattleMap(int _iSelectNum);
+	//bool InitBattleMap(int _iSelectNum);
 
 	// 전투 메뉴를 선택합니다.
 	bool SelectBattleMenu(int _battleFieldNum, CPlayer* _CPlayer);

@@ -27,48 +27,7 @@ POSITION CBattleField::GetPosition()
 
 int CBattleField::InteractAction(int _iSelectNum, CPlayer* _CPlayer)
 {
-	//return SelectBattleMap();
 	return SelectBattleMenu(_iSelectNum, _CPlayer);
-}
-
-// x
-int CBattleField::SelectBattleMap()
-{
-	return 0;
-	/*int iSelectNum(0);
-
-	cout << "1. 초급 2. 중급 3. 고급 4. 전 단계 : ";
-	cin >> iSelectNum;
-
-	
-	switch (iSelectNum)
-	{
-	case LOW_MAP:
-		
-		break;
-	case MID_MAP:
-		m_CEnemy->InitInfo("중급 몬스터", 70, 7);
-		break;
-	case HIGH_MAP:
-		m_CEnemy->InitInfo("고급 몬스터", 100, 10);
-		break;
-	case END:
-		return END;
-	default:
-		cout << "잘못 입력" << endl;
-		system("pause");
-		return -1;
-	}*/
-
-	/*while (SelectBattle())
-	{
-		ProcessBattle();
-	}*/
-}
-
-bool CBattleField::InitBattleMap(int _iSelectNum)
-{
-	return true;
 }
 
 bool CBattleField::SelectBattleMenu(int _battleFieldNum, CPlayer* _CPlayer)
@@ -77,13 +36,14 @@ bool CBattleField::SelectBattleMenu(int _battleFieldNum, CPlayer* _CPlayer)
 
 	if (!m_CEnemy)
 	{
-		m_CEnemy = new CEnemy(1);
-		m_CEnemy->InitInfo(_battleFieldNum);
+		m_CEnemy = new CEnemy;
+		((CEnemy*)m_CEnemy)->InitInfo(_battleFieldNum);
+		//m_CEnemy->UpdateHP(10);
 
-		cout << "앗!! 야생의 " << m_CEnemy->GetStateInfo().szName << "가 튀어나왔다!!" << endl;
+		cout << "앗!! 야생의 " << ((CEnemy*)m_CEnemy)->GetObjectInfo().szName << "가 튀어나왔다!!" << endl;
 		cout << "무엇을 할까?" << endl << endl;
 	}
-	m_CEnemy->ShowInfo();
+	((CEnemy*)m_CEnemy)->ShowObjectInfo();
 
 	cout << "1. 공격한다. 2. 도망간다. : ";
 	cin >> iSelectNum;
@@ -108,8 +68,20 @@ bool CBattleField::SelectBattleMenu(int _battleFieldNum, CPlayer* _CPlayer)
 
 bool CBattleField::ProcessBattle(CPlayer* _CPlayer)
 {
-	_CPlayer->UpdateHP(-m_CEnemy->GetStateInfo().iAttackPower);
-	m_CEnemy->UpdateHP(-_CPlayer->GetStateInfo().iAttackPower);
+	int playerAttackPower = _CPlayer->GetObjectInfo().iAttackPower;
+	int enemyAttackPower = ((CEnemy*)m_CEnemy)->GetObjectInfo().iAttackPower;
+
+	_CPlayer->virtualGetObjectInfo()->iAttackPower;
+
+	cout << ((CEnemy*)m_CEnemy)->GetObjectInfo().szName << "에게 피해를 "
+		<< playerAttackPower << " 주었다!" << endl;
+	cout << ((CEnemy*)m_CEnemy)->GetObjectInfo().szName << "에게 피해를 "
+		<< enemyAttackPower << " 받았다!" << endl;
+
+	_CPlayer->UpdateHP(-enemyAttackPower);
+	m_CEnemy->UpdateHP(-playerAttackPower);
+	
+	system("pause");
 
 	if (!m_CEnemy->CheckBattleAble())
 	{

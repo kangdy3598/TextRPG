@@ -1,11 +1,8 @@
 #pragma once
 #include "../Player/Player.h"
 
-struct tagNPCInfo
+struct tagNPCInfo : tagObjectInfo
 {
-	char szName[30]; // NPC 이름
-	POSITION position; // NPC 위치
-
 	int iScriptSize;
 	char szScript[10][256]; // 대사
 };
@@ -16,7 +13,7 @@ private:
 
 	tagNPCInfo m_NPCInfo;
 
-	POSITION m_Position = POSITION(25, 5);
+	POSITION m_Position;
 
 private:
 	

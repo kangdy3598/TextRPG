@@ -70,7 +70,7 @@ public:
 	POSITION* UpdateDrawMap(int _mapData[][20], int& _hitObject, POSITION* _position);
 	
 	// 플레이어 정보를 담은 UI를 그립니다.
-	void DrawPlayerInfo(tagStateInfo tagStateInfo);
+	void DrawPlayerInfo(tagPlayerInfo _tagPlayerInfo);
 
 	int DrawSelectJobScreen();
 

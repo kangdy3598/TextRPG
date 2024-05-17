@@ -1,35 +1,6 @@
 #include "../_stdafx.h"
 #include "Player.h"
 
-//void CPlayer::SetPosition(int _posX, int _posY)
-//{
-//	m_Position.x = _posX;
-//	m_Position.y = _posY;
-//}
-//void CPlayer::SetPosition(POSITION _position)
-//{
-//	m_Position = _position;
-//}
-//
-//void CPlayer::GetPosition(int& _posX, int& _posY)
-//{
-//	m_Position.x = _posX;
-//	m_Position.y = _posY;
-//}
-//void CPlayer::GetPosition(POSITION& _position)
-//{
-//	_position = m_Position;
-//}
-//POSITION CPlayer::GetPosition()
-//{
-//	return m_Position;
-//}
-
-//tagStateInfo CPlayer::GetStateInfo()
-//{
-//	return m_StateInfo;
-//}
-
 void CPlayer::SelectJob()
 {
 	int iSelectNumber = 0;
@@ -42,13 +13,13 @@ void CPlayer::SelectJob()
 		switch (iSelectNumber)
 		{
 		case WARRIOR:
-			InitStateInfo("전사", 100, 50, 8, 10);
+			InitInfo("전사", 100, 50, 8, 10);
 			return;
 		case MAGICIAN:
-			InitStateInfo("마법사", 80, 130, 15, 5);
+			InitInfo("마법사", 80, 130, 15, 5);
 			return;
 		case THIEF:
-			InitStateInfo("도적", 100, 100, 10, 7);
+			InitInfo("도적", 100, 100, 10, 7);
 			return;
 		default:
 			cout << "잘못 선택" << endl;
@@ -62,26 +33,35 @@ void CPlayer::SelectJob()
 
 }
 
-void CPlayer::InitStateInfo(const char _szJobName[],
+//void CPlayer::ShowObjectInfo()
+//{
+//}
+
+tagPlayerInfo CPlayer::GetObjectInfo()
+{
+	return m_tagPlayerInfo;
+}
+
+void CPlayer::InitInfo(const char _szJobName[],
 					   int _iMaxHP, int _iMaxMP,
 					   int _iAttackPower, int _iDefensePower)
 {
-	m_StateInfo.iLevel = 1;
-	m_StateInfo.iNowExp = 0;
+	m_tagPlayerInfo.iLevel = 1;
+	m_tagPlayerInfo.iNowExp = 0;
 
-	strcpy_s(m_StateInfo.szName, _szJobName);
+	strcpy_s(m_tagPlayerInfo.szName, _szJobName);
 
-	m_StateInfo.iMaxHP = _iMaxHP;
-	m_StateInfo.iNowHP = _iMaxHP;
+	m_tagPlayerInfo.iMaxHP = _iMaxHP;
+	m_tagPlayerInfo.iNowHP = _iMaxHP;
 
-	m_StateInfo.iMaxMP = _iMaxMP;
-	m_StateInfo.iNowMP = _iMaxMP;
+	m_tagPlayerInfo.iMaxMP = _iMaxMP;
+	m_tagPlayerInfo.iNowMP = _iMaxMP;
 
-	m_StateInfo.iAttackPower = _iAttackPower;
-	m_StateInfo.iDefensePower = _iDefensePower;
+	m_tagPlayerInfo.iAttackPower = _iAttackPower;
+	m_tagPlayerInfo.iDefensePower = _iDefensePower;
 }
 
-void CPlayer::SaveStateInfo()
+void CPlayer::SaveInfo()
 {
 	FILE* pSaveFile = NULL;
 	errno_t err = fopen_s(&pSaveFile, "_Data/PlayerInfo.txt", "wb");
@@ -89,12 +69,12 @@ void CPlayer::SaveStateInfo()
 	if (err)
 		return;
 
-	fwrite((void*) &m_StateInfo, sizeof(m_StateInfo), 1, pSaveFile);
+	fwrite((void*) &m_tagPlayerInfo, sizeof(m_tagPlayerInfo), 1, pSaveFile);
 
 	fclose(pSaveFile);
 }
 
-bool CPlayer::LoadStateInfo()
+bool CPlayer::LoadInfo()
 {
 	FILE* pLoadFile = NULL;
 	errno_t err = fopen_s(&pLoadFile, "_Data/PlayerInfo.txt", "rb");
@@ -104,36 +84,26 @@ bool CPlayer::LoadStateInfo()
 		return false;
 	}
 
-	fread((void*)&m_StateInfo, sizeof(m_StateInfo), 1, pLoadFile);
+	fread((void*)&m_tagPlayerInfo, sizeof(m_tagPlayerInfo), 1, pLoadFile);
 
 	return true;
 }
 
-void CPlayer::ShowStateInfo()
-{
-	/*system("cls");
-	cout << "이름 :" << m_StateInfo.szJobName << endl;
-	cout << "레벨 : " << m_StateInfo.iLevel << endl;
-	cout << "경험치 : " << m_StateInfo.iNowExp << endl;
-	cout << "체력 :" << m_StateInfo.iNowHP << " / " << m_StateInfo.iMaxHP << endl;
-	cout << "마나 :" << m_StateInfo.iNowMP << " / " << m_StateInfo.iMaxMP << endl;
-	cout << "공격력 :" << m_StateInfo.iAttackPower << endl;*/
-}
-
 void CPlayer::UpdateHP(int _iAmount)
 {
-	m_StateInfo.iNowHP += _iAmount;
-	if (m_StateInfo.iNowHP > m_StateInfo.iMaxHP)
-		m_StateInfo.iNowHP = m_StateInfo.iMaxHP;
+	m_tagPlayerInfo.iNowHP += _iAmount;
+	if (m_tagPlayerInfo.iNowHP > m_tagPlayerInfo.iMaxHP)
+		m_tagPlayerInfo.iNowHP = m_tagPlayerInfo.iMaxHP;
 }
 
 bool CPlayer::CheckBattleAble()
 {
-	return m_StateInfo.iNowHP > 0;
+	return m_tagPlayerInfo.iNowHP > 0;
 }
 
 void CPlayer::Release()
 {
-	SaveStateInfo();
+	//SaveInfo();
+	
 	// delete m_playerInfo;
 }
