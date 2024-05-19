@@ -23,8 +23,8 @@ private:
 
 public:
 
-	CEnemy() { cout << "Enemy 持失切" << endl; }
-	CEnemy(int _num) { cout << "Enemy 持失切 Num :" << _num << endl; }
+	CEnemy() { /*cout << "Enemy 持失切" << endl;*/ }
+	CEnemy(int _num) { /*cout << "Enemy 持失切 Num :" << _num << endl;*/ }
 	~CEnemy() {}
 
 	//void InputInfo();

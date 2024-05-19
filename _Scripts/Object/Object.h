@@ -44,7 +44,7 @@ public:
 
 	// 선택한 오브젝트의 정보를 불러옵니다.
 	//tagObjectInfo GetObjectInfo(){}
-	virtual tagObjectInfo* virtualGetObjectInfo(){ }
+	virtual tagObjectInfo* virtualGetObjectInfo() = 0;
 	// 선택한 오브젝트의 정보를 보여줍니다.
 	//virtual void ShowObjectInfo();
 

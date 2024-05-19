@@ -1,5 +1,9 @@
 #pragma once
 
+//char		szInput[8] = "";
+///*cin*/ gets_s(szInput, sizeof(szInput));	// stdin으로 고정	(공백을 읽어들일 수 있음)
+///*cout*/puts(szInput);
+
 #define SAFE_DELETE(p) if(p){ delete p; p = nullptr;} // 들여 쓰기 하고 싶다면 \ 추가
 #define SAFE_DELETE_ARRAY(p) if(p){ delete p[]; p = nullptr;}
 
@@ -27,3 +31,6 @@
 
 #define BATTLE_MARK_NUM 3
 #define BATTLE_MARK "※"
+
+#define SHOP_MARK_NUM 4
+#define SHOP_MARK "▲"

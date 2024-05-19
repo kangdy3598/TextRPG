@@ -7,6 +7,7 @@ int main()
 
 	CGameManger cGameManager;
 
+	
 	if(cGameManager.StartGame())
 		cGameManager.UpdateGame();
 	cGameManager.EndGame();

@@ -10,6 +10,8 @@ private:
 	POSITION m_Position;
 
 public:
+	CBattleField() { m_Position = POSITION(24, 2); }
+	~CBattleField() {}
 
 	// 현재 전투맵 위치를 설정 합니다.
 	void SetPosition(int _posX, int _posY);

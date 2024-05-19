@@ -71,8 +71,6 @@ bool CBattleField::ProcessBattle(CPlayer* _CPlayer)
 	int playerAttackPower = _CPlayer->GetObjectInfo().iAttackPower;
 	int enemyAttackPower = ((CEnemy*)m_CEnemy)->GetObjectInfo().iAttackPower;
 
-	_CPlayer->virtualGetObjectInfo()->iAttackPower;
-
 	cout << ((CEnemy*)m_CEnemy)->GetObjectInfo().szName << "에게 피해를 "
 		<< playerAttackPower << " 주었다!" << endl;
 	cout << ((CEnemy*)m_CEnemy)->GetObjectInfo().szName << "에게 피해를 "
