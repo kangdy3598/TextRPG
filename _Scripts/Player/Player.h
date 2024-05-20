@@ -56,8 +56,8 @@ public:
 	// 선택한 직업의 정보를 보여줍니다.
 	//void ShowObjectInfo();
 
-	tagPlayerInfo GetObjectInfo();
-	virtual tagPlayerInfo* virtualGetObjectInfo() { return &m_tagPlayerInfo; }
+	//tagPlayerInfo GetObjectInfo();
+	virtual tagPlayerInfo* GetObjectInfo();
 	// _iAmount 만큼 현재 체력을 변경합니다.
 	virtual void UpdateHP(int _iAmount);
 

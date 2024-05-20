@@ -36,5 +36,6 @@ POSITION CObject::GetPosition()
 
 void CObject::Release()
 {
+	
 	// delete m_playerInfo;
 }
