@@ -43,7 +43,8 @@ public:
 	POSITION GetPosition();
 
 	// 선택한 오브젝트의 정보를 불러옵니다.
-	virtual tagObjectInfo* GetObjectInfo() = 0;
+	//tagObjectInfo GetObjectInfo(){}
+	virtual tagObjectInfo* virtualGetObjectInfo(){ }
 	// 선택한 오브젝트의 정보를 보여줍니다.
 	//virtual void ShowObjectInfo();
 

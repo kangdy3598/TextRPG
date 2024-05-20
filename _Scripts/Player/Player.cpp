@@ -37,10 +37,10 @@ void CPlayer::SelectJob()
 //{
 //}
 
-//tagPlayerInfo CPlayer::GetObjectInfo()
-//{
-//	return m_tagPlayerInfo;
-//}
+tagPlayerInfo CPlayer::GetObjectInfo()
+{
+	return m_tagPlayerInfo;
+}
 
 void CPlayer::InitInfo(const char _szJobName[],
 					   int _iMaxHP, int _iMaxMP,
@@ -87,11 +87,6 @@ bool CPlayer::LoadInfo()
 	fread((void*)&m_tagPlayerInfo, sizeof(m_tagPlayerInfo), 1, pLoadFile);
 
 	return true;
-}
-
-tagPlayerInfo* CPlayer::GetObjectInfo()
-{
-	return &m_tagPlayerInfo;
 }
 
 void CPlayer::UpdateHP(int _iAmount)

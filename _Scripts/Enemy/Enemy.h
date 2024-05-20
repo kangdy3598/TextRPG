@@ -34,8 +34,8 @@ public:
 	
 	// 전투 중인 몬스터의 정보를 불러옵니다.
 	//tagStateInfo GetInfo();
-	//tagEnemyInfo GetObjectInfo();
-	virtual tagEnemyInfo* GetObjectInfo();
+	tagEnemyInfo GetObjectInfo();
+	virtual tagEnemyInfo* virtualGetObjectInfo() { return &m_tagEnemyInfo; }
 	// 전투 중인 몬스터의 정보를 보여줍니다.
 	virtual void ShowObjectInfo();
 

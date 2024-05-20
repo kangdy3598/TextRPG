@@ -163,7 +163,7 @@ void CGameManger::InteractionObject(int _objectNum)
 		while (iBattleNum != 0)
 		{
 			system("cls");
-			m_CGraphics.DrawPlayerInfo(m_CPlayer->GetObjectInfo());
+			m_CGraphics.DrawPlayerInfo(((CPlayer*)m_CPlayer)->GetObjectInfo());
 			iBattleNum = m_CBattleField->InteractAction(1, (CPlayer*)m_CPlayer);
 		}
 

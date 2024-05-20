@@ -36,9 +36,9 @@ void CEnemy::SetEnemyInfo(const char _szName[], int _iMaxHP, int _iAttackPower)
 //	return m_StateInfo;
 //}
 
-tagEnemyInfo* CEnemy::GetObjectInfo()
+tagEnemyInfo CEnemy::GetObjectInfo()
 {
-	return &m_tagEnemyInfo;
+	return m_tagEnemyInfo;
 }
 
 void CEnemy::ShowObjectInfo()
