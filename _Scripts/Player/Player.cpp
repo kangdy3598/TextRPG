@@ -1,6 +1,12 @@
 #include "../_stdafx.h"
 #include "Player.h"
 
+CPlayer::CPlayer()
+{
+	m_Position = POSITION(14, 5);
+	m_MyJobCode = 0;
+	m_tagPlayerInfo.tagInvenInfo.iGold = 1000;
+}
 void CPlayer::SelectJob()
 {
 	int iSelectNumber = 0;

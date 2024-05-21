@@ -19,6 +19,9 @@ private:
 	
 
 public:
+
+	CNPC() { m_Position = POSITION(25, 5); }
+	~CNPC() {}
 	// NPC의 정보를 초기화 합니다.
 	void InitNPCInfo(const char _szName[], const char _szscript[][256], int _scriptSize);
 

@@ -4,8 +4,9 @@
 CGameManger::CGameManger()
 {
 	m_CPlayer = nullptr;
-	m_CDownPlayer = (CPlayer*)m_CPlayer;
 	m_CEnemy = nullptr;
+
+	m_Shop = nullptr;
 	m_CNPC = nullptr;
 	m_CMap = nullptr;
 	m_CBattleField = nullptr;
@@ -25,10 +26,11 @@ bool CGameManger::StartGame()
 	// ★상속성 : CObject 자료형으로 m_CPlayer를 생성하면
 	//           CObject론 CPlayer클래스 멤버함수를 실행할 수 없기 때문에 오류가 난다.
 	bool bLoadPlayerInfo = false/*m_CPlayer->LoadInfo()*/; 
+
 	switch (m_CGraphics.DrawTitleScreen(bLoadPlayerInfo))
 	{
 	case RUNNING - 1:
-		m_CGraphics.DrawSelectJobScreen();
+		//m_CGraphics.DrawSelectJobScreen();
 		((CPlayer*)m_CPlayer)->SelectJob();
 	case RUNNING:
 		return true;
@@ -54,12 +56,13 @@ void CGameManger::UpdateGame()
 		if (!m_bIsDrawingMap)
 		{
 			m_CGraphics.InitDrawMap((int(*)[20])mapData, &playerPosition);
-			m_CGraphics.DrawPlayerInfo(((CPlayer*)m_CPlayer)->GetObjectInfo());
+			m_CGraphics.DrawInfo(((CPlayer*)m_CPlayer)->GetObjectInfo());
 			m_bIsDrawingMap = true;
 		}
 		
+		
 		returnPosition
-		= m_CGraphics.UpdateDrawMap((int(*)[20])mapData, objectNumber, &playerPosition);
+		= m_CGraphics.UpdateDrawMap((int(*)[20])mapData, objectNumber, &playerPosition, m_bIsDrawingMap);
 
 		// returnPosition이 nullptr이 아니면	
 		if (returnPosition != nullptr)
@@ -113,14 +116,19 @@ void CGameManger::EndGame()
 
 void CGameManger::InitGame()
 {
-	m_CPlayer = new CPlayer;
-	if (!m_CPlayer) return;
-
+	POSITION temp;
 	m_CMap = new CMap;
 	if (!m_CMap) return;
 
+	m_CPlayer = new CPlayer;
+	if (!m_CPlayer) return;
+	m_CPlayer->GetPosition(temp);
+	m_CMap->SetMapData(temp, PLAYER_MARK_NUM);
+
 	m_CNPC = new CNPC;
 	if (!m_CNPC) return;
+	m_CNPC->GetPosition(temp);
+	m_CMap->SetMapData(temp, NPC_MARK_NUM);
 
 	char temp_script[][256] =
 	{ "초급 몬스터, 중급 몬스터, 고급 몬스터 각각 한 마리씩 잡아 오시오.",
@@ -130,21 +138,15 @@ void CGameManger::InitGame()
 	int temp_size = sizeof(temp_script) / sizeof(temp_script[0]);
 	m_CNPC->InitNPCInfo("수배 표지판", temp_script, temp_size);
 
+	m_Shop = new CShop;
+	if (!m_Shop) return;
+	m_Shop->GetPosition(temp);
+	m_CMap->SetMapData(temp, SHOP_MARK_NUM);
+
 	m_CBattleField = new CBattleField;
 	if (!m_CBattleField) return;
-
-	POSITION temp;
-	m_CPlayer->SetPosition(POSITION(14, 5));
-	m_CPlayer->GetPosition(temp);
-	m_CMap->SetMapData(temp, PLAYER_MARK_NUM);
-
-	m_CNPC->SetPosition(POSITION(25, 5));
-	m_CNPC->GetPosition(temp);
-	m_CMap->SetMapData(temp, NPC_MARK_NUM);
-
-	m_CBattleField->SetPosition(POSITION(24, 2));
 	m_CBattleField->GetPosition(temp);
-	m_CMap->SetMapData(temp, BATTLE_MARK_NUM);
+	m_CMap->SetMapData(temp, BATTLE_MARK_NUM);	
 }
 
 void CGameManger::InteractionObject(int _objectNum)
@@ -163,10 +165,16 @@ void CGameManger::InteractionObject(int _objectNum)
 		while (iBattleNum != 0)
 		{
 			system("cls");
-			m_CGraphics.DrawPlayerInfo(((CPlayer*)m_CPlayer)->GetObjectInfo());
+			m_CGraphics.DrawInfo(((CPlayer*)m_CPlayer)->GetObjectInfo(), 1);
 			iBattleNum = m_CBattleField->InteractAction(1, (CPlayer*)m_CPlayer);
 		}
 
+		break;
+
+	case SHOP_MARK_NUM:
+		m_CGraphics.DrawInfo(((CPlayer*)m_CPlayer)->GetObjectInfo(), 2);
+		m_CGraphics.DrawShopItemList();
+		//m_Shop->Interaction(m_CPlayer);
 		break;
 	default:
 		break;

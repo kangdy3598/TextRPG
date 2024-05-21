@@ -8,13 +8,13 @@ enum JOBNAME
 	JOB_COUNT
 };
 
-struct tagPlayerInfo : tagBattleObjectInfo
-{
-	int iNowExp = 0;
-};
-
 struct tagInvenInfo
 {
+	// 최대 아이템 이름 길이 : 32
+	// 최대 아이템 개수 : 10
+	char szEquipItemList[10][32];
+	char szUseItemList[10][32];
+
 	int iGold;
 };
 
@@ -27,14 +27,21 @@ struct tagEquipInfo
 	// weapon
 };
 
+struct tagPlayerInfo : tagBattleObjectInfo
+{
+	int iNowExp = 0;
+	tagInvenInfo tagInvenInfo;
+};
 class CPlayer : public CObject
 {
 public:
-	CPlayer() { }
-	CPlayer(int _num) /* : CObject(_num)*/ { cout << "Player 생성자 Num :" << _num << endl; }
+	CPlayer();
 	~CPlayer() {}
 private:
 	tagPlayerInfo m_tagPlayerInfo;
+	//tagInvenInfo m_tagInvenInfo;
+
+	int m_MyJobCode;
 private:
 
 	// 선택한 직업으로 플레이어를 초기화 합니다.
@@ -46,7 +53,6 @@ private:
 	void SaveInfo();
 
 public:
-
 	// 캐릭터 정보 데이터를 불러옵니다.
 	bool LoadInfo();
 
@@ -58,6 +64,7 @@ public:
 
 	tagPlayerInfo GetObjectInfo();
 	virtual tagPlayerInfo* virtualGetObjectInfo() { return &m_tagPlayerInfo; }
+
 	// _iAmount 만큼 현재 체력을 변경합니다.
 	virtual void UpdateHP(int _iAmount);
 
